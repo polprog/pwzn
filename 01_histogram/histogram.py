@@ -12,18 +12,16 @@ def make_histogram(wordcount: dict):
     # sort dict by value, descending, return first N keys
     topkeys = sorted(wordcount, key=lambda x: wordcount[x],
                      reverse=True)[:args.num_words]
-    print("##########")
-    print(topkeys)
     if not topkeys:
         return
-    # Normalize the histogram to 10
+    # Normalize the histogram to 30
     maxhist = wordcount[max(topkeys, key=lambda x: wordcount[x])]
-    print(f"maxhist={maxhist}")
-    for key in topkeys:
-        print(key, "\t","#" * int(30*wordcount[key]/maxhist))
+    if not args.color:
+        for key in topkeys:
+            print(key, "\t","#" * int(30*wordcount[key]/maxhist), wordcount[key])
     
 
-def cleanup_words(words, ignores, specialchars="!;()-,—", filt=None, notfilt=None):
+def cleanup_words(words, ignores, specialchars="!;:()-,—?.", filt=None, notfilt=None, min_len=None):
     """Clean up a line of words, lowercase, remove empty,
     remove specialchars (also utf-8 ones)
     @param filt: filter only words containing the given string"""
@@ -35,9 +33,12 @@ def cleanup_words(words, ignores, specialchars="!;()-,—", filt=None, notfilt=N
         nreg = re.compile(f'.*{notfilt}.*')
     newwords = []
     for word in words:
-        if word in ignores:
+        if ignores and word in ignores:
             continue
         word = re.sub(rf'[{specialchars}]', "", word)
+        if min_len:
+            if len(word) < min_len:
+                continue
         if filt:
             if not reg.match(word):
                 continue
@@ -49,7 +50,7 @@ def cleanup_words(words, ignores, specialchars="!;()-,—", filt=None, notfilt=N
         newwords.append(word.lower())
     return newwords
         
-def count_words(f, ignores=[], filt=None, notfilt=None):
+def count_words(f, ignores=[], filt=None, notfilt=None, min_len=None):
     """Count words in the file, return dict of words and their counts
     words are converted to lower case first. This method does some 
     cleaning up (remove special chars, etc.)"""
@@ -61,7 +62,7 @@ def count_words(f, ignores=[], filt=None, notfilt=None):
             continue
         words = line.split(" ")
         # Clean up words prior to counting
-        for word in cleanup_words(words, ignores, filt=filt, notfilt=notfilt):
+        for word in cleanup_words(words, ignores, filt=filt, notfilt=notfilt, min_len=min_len):
             if word not in wordcount:
                 wordcount[word] = 0
             wordcount[word] = wordcount[word] + 1
@@ -78,7 +79,7 @@ if __name__ == '__main__':
                         help="Number of top words to print historgram for",
                         default=10, type=int)
     parser.add_argument('-l', '--min-length',
-                        help="Minumum length of word (letters)", default=0)
+                        help="Minumum length of word (letters)", type=int)
     
     parser.add_argument('-i', '--ignore-words',
                         help="List of ignored words, comma separated")
@@ -93,12 +94,13 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--progress', help="")
 
     args = parser.parse_args()
-    print(args)
 
-    ignores = [word.lower() for word in args.ignore_words.split(",")]
-    
+    ignores = None
+    if args.ignore_words:
+        ignores = [word.lower() for word in args.ignore_words.split(",")]
+
+        
     # FIXME: -d option
-
     if args.directory:
         # We have to iterate for all files in directory given by filename
         pass
@@ -106,5 +108,5 @@ if __name__ == '__main__':
         # Just this one file
         make_histogram(
             count_words(open(args.filename, "r"), ignores,
-                        filt=args.match_str, notfilt=args.ignore_str)
+                        filt=args.match_str, notfilt=args.ignore_str, min_len=args.min_length)
         )
