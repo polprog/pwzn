@@ -2,10 +2,10 @@
 - [jest] nazwa pliku jako parametr skryptu
 - [jest] wyświetlanie histogramu od najczęściej do najrzadziej występujących wyrazów
 - [jest] opcjonalny parametr określający dla ilu wyrazów histogram wyświetlić (domyślnie 10)
-- opcjonalny parametr określający minimalną długość histogramowanego słowa (domyślnie 0)
+- [jest] opcjonalny parametr określający minimalną długość histogramowanego słowa (domyślnie 0)
 - [jest] *(opcjonalnie)* dodatkowy, opcjonalny parametr, przyjmujący listę wyrazów ignorowanych
 - [jest] *(opcjonalnie)* dodatkowy, opcjonalny parametr, przyjmujący ciąg/ciągi znaków, których nie mogą zawierać zliczane wyrazy
 - [jest] *(opcjonalnie)* dodatkowy, opcjonalny parametr, przyjmujący ciąg/ciągi znaków, które muszą zawierać zliczane wyrazy
-- *(opcjonalnie)* kolorowy histogram, który mnie oczaruje
+- [jest] *(opcjonalnie)* kolorowy histogram, który mnie oczaruje
 - *(opcjonalnie)* dodatkowy parametr z nazwą katalogu; program przechodzi przez wszystkie pliki tekstowe w tym katalogu, zlicza słowa i robi histogram jak wyżej
-- *(opcjonalnie)* ma się wyświetlać jakiś pasek postępu
+- [jest]*(opcjonalnie)* ma się wyświetlać jakiś pasek postępu

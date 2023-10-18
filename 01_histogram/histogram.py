@@ -5,6 +5,12 @@
 import numpy as np
 import argparse
 import re
+from tqdm import tqdm
+from ascii_graph import Pyasciigraph
+from ascii_graph.colors import *
+from ascii_graph.colordata import vcolor
+from ascii_graph.colordata import hcolor
+
 version = 1.0
 args = None
 
@@ -19,7 +25,14 @@ def make_histogram(wordcount: dict):
     if not args.color:
         for key in topkeys:
             print(key, "\t","#" * int(30*wordcount[key]/maxhist), wordcount[key])
-    
+    else:
+        grdata = [(key, wordcount[key]) for key in topkeys]
+        graph = Pyasciigraph()
+        pattern = [Gre, Yel, Red, Cya, Pur]
+        data = vcolor(grdata, pattern)
+        for line in  graph.graph('Word histogram', data):
+            print(line)
+            
 
 def cleanup_words(words, ignores, specialchars="!;:()-,—?.", filt=None, notfilt=None, min_len=None):
     """Clean up a line of words, lowercase, remove empty,
@@ -55,9 +68,9 @@ def count_words(f, ignores=[], filt=None, notfilt=None, min_len=None):
     words are converted to lower case first. This method does some 
     cleaning up (remove special chars, etc.)"""
     wordcount = {}
-    for line in f:
+    # Usually too fast to see the program run
+    for line in tqdm(f):
         line = line.replace("\n", "") # chomp
-        # XXX clean up special chars !?;() etc.
         if not line:
             continue
         words = line.split(" ")
@@ -99,7 +112,6 @@ if __name__ == '__main__':
     if args.ignore_words:
         ignores = [word.lower() for word in args.ignore_words.split(",")]
 
-        
     # FIXME: -d option
     if args.directory:
         # We have to iterate for all files in directory given by filename
