@@ -68,7 +68,7 @@ prob = lambda dE: np.exp(-beta * dE)
 for k in range(nsteps):
     plt.imshow(material)
     #plt.show()
-    plt.savefig(output_dir + f"iter{k}.png")
+    plt.savefig(output_dir + f"iter{k:04d}.png")
 
     for l in range(N**2):
         # XXX: Handle edges
