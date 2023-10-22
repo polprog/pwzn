@@ -1,4 +1,9 @@
 
+01: Histogramowanie słów
+---
+
+Prawie wszystko zrobione
+
 02: Model Isinga
 ---
 
