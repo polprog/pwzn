@@ -8,3 +8,9 @@ Prawie wszystko zrobione
 ---
 
 ![Model isinga](img/ising1.png)
+
+
+03: dekoratory
+---
+
+Zrobione
