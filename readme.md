@@ -34,3 +34,17 @@ Bez numby:
     sys     0m13,462s
 
 mach: Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
+
+05: scrape statyczny
+---
+TODO: lab005
+
+06: scrape Selenium
+---
+TODO: lab006
+
+07: Model SIR i odeint
+---
+Model SIR policzony za pomocą `odeint`
+![Model SIR](img/sir.png)
+
