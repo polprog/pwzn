@@ -37,7 +37,9 @@ mach: Intel(R) Core(TM) i3-2350M CPU @ 2.30GHz
 
 05: scrape statyczny
 ---
-TODO: lab005
+Scrapowanie [bash.org.pl](http://bash.org.pl) z BeautifulSoup4
+
+*Autor nie odpowiada za treści publikowane na stronie*
 
 06: scrape Selenium
 ---
