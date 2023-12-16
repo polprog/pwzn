@@ -43,7 +43,12 @@ Scrapowanie [bash.org.pl](http://bash.org.pl) z BeautifulSoup4
 
 06: scrape Selenium
 ---
-TODO: lab006
+Scrapowanie [pap.pl](http://www.pap.pl) z Selenium + Firefox
+
+Wyrzuca nagłówki i linki do artykułów ze strony głównej na stdout.
+
+*Działanie w celach edukacyjnych, zgodne z definicją dozwolonego użytku w rozumieniu ustawy "Ustawa z dnia 4 lutego 1994 r. o prawie autorskim i prawach pokrewnych"*
+
 
 07: Model SIR i odeint
 ---
