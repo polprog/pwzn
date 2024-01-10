@@ -36,7 +36,7 @@ def fill_material(material, N, spindens=0.5):
 
 N = 100
 J = 0.5
-beta = 1
+beta = 0.00000001
 B = 1
 nsteps = 100
 spindens = 0.5
