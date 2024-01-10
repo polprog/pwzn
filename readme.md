@@ -55,3 +55,8 @@ Wyrzuca nagłówki i linki do artykułów ze strony głównej na stdout.
 Model SIR policzony za pomocą `odeint`
 ![Model SIR](img/sir.png)
 
+
+08: Sympy
+---
+
+oscylatorki 
